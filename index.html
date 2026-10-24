@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La responsabilité en boulangerie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap">
+<style>
+/* ── RESET & BASE ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Fiche d'exercices en thème clair : blocs = séances, cartes dépliables, corrections masquables */
+:root {
+  --bg:        #f4f6f9;
+  --surface:   #ffffff;
+  --card:      #ffffff;
+  --border:    #dfe3ea;
+  --border-hi: #b9c0ce;
+  --text:      #1d2230;
+  --text-dim:  #5c6476;
+  --accent:    #b97d00;
+  --accent-bg: #fff6df;
+  --green:     #1b8047;
+  --green-bg:  #ecf7f0;
+  --green-bd:  #c9e6d4;
+  --green-dk:  #12552f;
+  --red:       #c23b3b;
+  --blue:      #2d69ad;
+  --blue-bg:   #edf3fb;
+  --purple:    #6f45ad;
+  --font-head: 'Syne', 'Trebuchet MS', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius:    10px;
+  color-scheme: light;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── HEADER ──────────────────────────────────────────────── */
+.site-header {
+  background: linear-gradient(135deg, #ffffff 0%, #eef2f8 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 44px 20px 32px;
+  text-align: center;
+}
+.site-header .kicker {
+  display: inline-block;
+  background: var(--accent);
+  color: #ffffff;
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  border-radius: 3px;
+  margin-bottom: 18px;
+}
+.site-header h1 {
+  font-family: var(--font-head);
+  font-size: clamp(24px, 6vw, 38px);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.site-header .sub {
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 400;
+  max-width: 540px;
+  margin: 0 auto 20px;
+}
+.legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 0 auto 22px;
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+
+/* ── NAV ANCRES ──────────────────────────────────────────── */
+.nav-anchors {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.nav-anchors a {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  text-decoration: none;
+  transition: border-color .15s, color .15s;
+}
+.nav-anchors a:hover, .nav-anchors a:focus-visible { border-color: var(--accent); color: var(--accent); }
+
+/* ── CONTENEUR PRINCIPAL ─────────────────────────────────── */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 36px 18px 80px;
+}
+
+/* ── TITRE DE BLOC ───────────────────────────────────────── */
+.bloc-titre {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 52px 0 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.bloc-titre:first-child { margin-top: 0; }
+.bloc-titre .icone { font-size: 26px; flex-shrink: 0; }
+.bloc-titre h2 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+.bloc-titre h2 small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+/* ── MÉMO ────────────────────────────────────────────────── */
+.memo {
+  background: var(--green-bg);
+  border: 1px solid var(--green-bd);
+  border-left: 4px solid var(--green);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 16px 0 24px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.memo .memo-titre {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.memo code {
+  display: block;
+  background: #ffffff;
+  border: 1px solid var(--green-bd);
+  border-radius: 5px;
+  padding: 8px 12px;
+  color: var(--green-dk);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13.5px;
+  margin: 5px 0;
+}
+.memo .note { color: var(--text-dim); font-size: 13px; margin-top: 8px; }
+
+/* ── CARTE EXERCICE ──────────────────────────────────────── */
+.exo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: border-color .15s;
+}
+.exo-card:hover { border-color: var(--border-hi); }
+
+.exo-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+.exo-header::-webkit-details-marker { display: none; }
+.exo-header:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.exo-num {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  min-width: 40px;
+}
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.badge-1 { background: #e9f6ee; color: var(--green); border: 1px solid #bfe2cc; }
+.badge-2 { background: var(--accent-bg); color: #8a5d00; border: 1px solid #efd798; }
+.badge-3 { background: #fbeaea; color: var(--red); border: 1px solid #efc4c4; }
+.badge-exam { background: #f2ecfa; color: var(--purple); border: 1px solid #d9c9ef; }
+
+.exo-titre-txt {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1 1 200px;
+  min-width: 0;
+}
+.chevron { color: var(--text-dim); font-size: 13px; flex-shrink: 0; transition: transform .2s; }
+details[open] .chevron { transform: rotate(180deg); }
+
+/* ── CORPS DE L'EXERCICE ─────────────────────────────────── */
+.exo-body { padding: 0 16px 20px; border-top: 1px solid var(--border); }
+
+.contexte {
+  background: var(--blue-bg);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 16px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.contexte strong { color: var(--text); }
+
+.table-wrap { overflow-x: auto; margin: 12px 0; }
+.tableau-donnees {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--surface);
+}
+.tableau-donnees th {
+  background: #eef1f6;
+  color: var(--text-dim);
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.tableau-donnees td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+.tableau-donnees tr:last-child td { border-bottom: none; }
+.tableau-donnees td.num { font-weight: 700; color: var(--text); white-space: nowrap; }
+
+.questions { margin: 18px 0 0; }
+.question { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+.question .q-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  background: var(--accent);
+  color: #ffffff;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 11px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.question p { font-size: 14px; margin: 0; min-width: 0; }
+
+/* ── COUP DE POUCE ───────────────────────────────────────── */
+.ordre-grandeur {
+  background: var(--accent-bg);
+  border: 1px solid #efd798;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #6e4b00;
+  margin: 12px 0 0;
+}
+.ordre-grandeur::before { content: "💡 "; }
+
+/* ── BOUTON CORRECTION ───────────────────────────────────── */
+.btn-corrige {
+  background: var(--surface);
+  border: 1px solid var(--border-hi);
+  border-radius: 6px;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 16px;
+  margin-top: 18px;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-corrige:hover, .btn-corrige:focus-visible { border-color: var(--green); color: var(--green); }
+
+/* ── CORRECTION ──────────────────────────────────────────── */
+.correction {
+  display: none;
+  background: var(--green-bg);
+  border: 1px solid var(--green-bd);
+  border-radius: 6px;
+  padding: 16px;
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.correction.visible { display: block; }
+.correction .corr-etape {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--green-bd);
+}
+.correction .corr-etape:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.correction .c-num {
+  display: inline-block;
+  background: var(--green);
+  color: #ffffff;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 18px;
+  margin-right: 6px;
+}
+.correction code {
+  display: block;
+  background: #ffffff;
+  border: 1px solid var(--green-bd);
+  border-radius: 4px;
+  padding: 6px 12px;
+  color: var(--green-dk);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  margin: 5px 0;
+}
+.correction .res { font-family: var(--font-head); font-weight: 700; color: var(--text); }
+.correction .conclu { margin-top: 8px; font-size: 13.5px; color: #2c6244; font-style: italic; }
+.correction .tableau-corr { width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0; background: #ffffff; }
+.correction .tableau-corr th {
+  background: #dff0e6;
+  color: var(--green-dk);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  text-align: left;
+}
+.correction .tableau-corr td { padding: 6px 10px; border-bottom: 1px solid var(--green-bd); color: #24402f; vertical-align: top; }
+.correction .tableau-corr td.val { font-weight: 700; color: var(--green); }
+
+/* ── SÉPARATEUR ──────────────────────────────────────────── */
+hr.section-sep { border: none; border-top: 1px solid var(--border); margin: 54px 0 0; }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 20px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 12px;
+  background: var(--surface);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .exo-titre-txt { font-size: 13.5px; }
+  .contexte { font-size: 13.5px; }
+  .tableau-donnees { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="kicker">🥖 Gestion appliquée – CAP boulanger</div>
+  <h1>La responsabilité<br>en boulangerie</h1>
+  <p class="sub">Chapitre 18. 18 exercices en 5 séances, avec la boulangerie Le Fournil des Tilleuls. Ouvre un exercice, réponds sur ton cahier, puis vérifie avec la correction.</p>
+  <div class="legende">
+    <span class="badge badge-1">⬆ décollage</span> je découvre
+    <span class="badge badge-2">◆ intermédiaire</span> j'applique
+    <span class="badge badge-exam">★ examen</span> je m'entraîne
+  </div>
+  <nav class="nav-anchors">
+    <a href="#definition">1 · Être responsable</a>
+    <a href="#sortes">2 · Civile ou pénale</a>
+    <a href="#infractions">3 · Les infractions</a>
+    <a href="#civile">4 · Faute, dommage, exonération</a>
+    <a href="#examen">5 · Sujets type examen</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 1 – ÊTRE RESPONSABLE (séance 1)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="definition">
+  <span class="icone">⚖️</span>
+  <h2><small>Séance 1 · 1 h</small>Bloc 1 – Être responsable, c'est quoi ?</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 mémo</div>
+  <code>Responsabilité = obligation de réparer les dommages causés à une victime : par son propre fait, par le fait des personnes dont on doit répondre, ou par les choses que l'on a sous sa garde.</code>
+  <code>Vendre, c'est conclure un contrat avec le client. Dès que le client a passé sa commande, le contrat est conclu.</code>
+  <code>Le contrat crée des obligations pour le boulanger et pour le client. Si le boulanger ne les respecte pas, il est responsable des dommages causés.</code>
+  <p class="note">Articles 1382 et 1384 du Code civil et partie 2 du manuel. Depuis 2016, ces deux articles s'appellent 1240 et 1242 : le texte n'a pas changé.</p>
+</div>
+
+<!-- EX 1 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 1</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Ce que dit le Code civil</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      <strong>Françoise</strong> dirige la boulangerie <strong>Le Fournil des Tilleuls</strong>. Elle travaille avec <strong>Alain</strong>, ouvrier boulanger, <strong>Lucas</strong>, apprenti, et <strong>Paul</strong>, vendeur-livreur. Dans le fournil, elle a affiché deux articles du Code civil :<br><br>
+      • <em>« Tout fait quelconque de l'homme, qui cause à autrui un dommage, oblige celui par la faute duquel il est arrivé à le réparer. »</em> (article 1382)<br>
+      • <em>« On est responsable non seulement du dommage que l'on cause par son propre fait, mais encore de celui qui est causé par le fait des personnes dont on doit répondre, ou des choses que l'on a sous sa garde. »</em> (article 1384)
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>D'après l'article 1382, qui doit réparer le dommage ?</p></div>
+      <div class="question"><span class="q-num">2</span><p>D'après l'article 1384, cite les 3 cas où l'on est responsable.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Déduis une définition de la responsabilité (exercice 1 du manuel).</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> « autrui » veut dire « une autre personne ». Cherche les mots « propre fait », « personnes » et « choses ».</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span> La personne qui a commis la faute.
+        <code>Celui par la faute duquel le dommage est arrivé doit le réparer.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <code>Son propre fait · le fait des personnes dont on doit répondre · les choses que l'on a sous sa garde</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span> Corrigé du manuel :
+        <p class="res">La responsabilité est l'obligation légale qui impose à toute personne de réparer les dommages causés à une victime de son fait, de celui des personnes dont elle doit répondre ou des choses dont elle a la charge.</p>
+        <p class="conclu">À noter : le manuel cite les anciens numéros. Depuis la réforme de 2016, l'article 1382 est devenu l'article 1240 et l'article 1384 est devenu l'article 1242 du Code civil. Le texte est le même.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 2 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 2</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">La commande de Valérie</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      <strong>Valérie</strong>, cliente fidèle, commande à <strong>Paul</strong> une couronne de pain pour samedi midi. Paul note la commande sur le cahier de la boutique.<br><br>
+      Voici 4 obligations :<br>
+      • payer le prix des prestations commandées<br>
+      • fournir des aliments sains<br>
+      • assurer la sécurité du client<br>
+      • respecter les locaux et le matériel
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>À quel moment le contrat entre Valérie et la boulangerie est-il conclu ?</p></div>
+      <div class="question"><span class="q-num">2</span><p>Classe les 4 obligations dans un tableau : obligations du boulanger · obligations du client (exercice 2 du manuel).</p></div>
+      <div class="question"><span class="q-num">3</span><p>Que se passe-t-il si la boulangerie ne respecte pas ses obligations ?</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> chaque partie a 2 obligations. Demande-toi : « qui fait quoi dans la boutique ? ».</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <p class="res">Dès que Valérie a passé sa commande, le contrat est conclu.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span> Corrigé du manuel :
+        <div class="table-wrap">
+        <table class="tableau-corr">
+          <tr><th>Obligations du boulanger</th><th>Obligations du client</th></tr>
+          <tr><td class="val">Fournir des aliments sains</td><td class="val">Payer le prix des prestations commandées</td></tr>
+          <tr><td class="val">Assurer la sécurité du client</td><td class="val">Respecter les locaux et le matériel</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span>
+        <p>La boulangerie est responsable des dommages causés à Valérie.</p>
+        <p class="conclu">Le manuel parle du « boulanger-pâtissier » : les obligations sont les mêmes pour une boulangerie.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 3 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 3</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Qui n'a pas respecté son obligation ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Une semaine au <strong>Fournil des Tilleuls</strong> :<br><br>
+      <strong>a.</strong> un client part avec son gâteau commandé sans le payer ;<br>
+      <strong>b.</strong> une baguette vendue contient un morceau de plastique ;<br>
+      <strong>c.</strong> un client énervé casse volontairement le présentoir à viennoiseries ;<br>
+      <strong>d.</strong> une cliente se blesse sur une marche cassée de la boutique, signalée depuis un mois.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Pour chaque situation, indique qui n'a pas respecté son obligation : le boulanger ou le client.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Nomme l'obligation qui n'est pas respectée.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> reprends le tableau de l'exercice 2. Chaque situation correspond à une seule des 4 obligations.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <div class="table-wrap">
+        <table class="tableau-corr">
+          <tr><th>Situation</th><th>Qui ?</th><th>Obligation non respectée</th></tr>
+          <tr><td>a. Gâteau non payé</td><td class="val">Client</td><td>Payer le prix des prestations commandées</td></tr>
+          <tr><td>b. Plastique dans la baguette</td><td class="val">Boulanger</td><td>Fournir des aliments sains</td></tr>
+          <tr><td>c. Présentoir cassé</td><td class="val">Client</td><td>Respecter les locaux et le matériel</td></tr>
+          <tr><td>d. Marche cassée</td><td class="val">Boulanger</td><td>Assurer la sécurité du client</td></tr>
+        </table>
+        </div>
+        <p class="conclu">Le contrat crée des obligations pour les deux parties : le boulanger et le client peuvent tous les deux engager leur responsabilité.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr class="section-sep">
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 2 – CIVILE OU PÉNALE (séance 2)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="sortes" style="margin-top:40px">
+  <span class="icone">🧭</span>
+  <h2><small>Séance 2 · 1 h</small>Bloc 2 – Responsabilité civile ou pénale ?</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 mémo</div>
+  <code>Je commets une infraction à la loi → responsabilité pénale → amende ou peine de prison.</code>
+  <code>Je cause un dommage à une autre personne → responsabilité civile → dommages-intérêts versés à la victime.</code>
+  <code>Civile contractuelle : je suis lié par un contrat avec la victime.</code>
+  <code>Civile délictuelle : pas de contrat, j'ai causé un dommage par imprudence, par négligence ou de façon volontaire.</code>
+  <p class="note">Schéma de la partie 2 du manuel. La responsabilité personnelle concerne la vie privée, la responsabilité professionnelle concerne le travail.</p>
+</div>
+
+<!-- EX 4 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 4</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Le schéma des responsabilités</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Lucas, l'apprenti, recopie le schéma du manuel sur son cahier. Il lui manque des mots :<br><br>
+      • si je fais une infraction à la loi, j'engage ma responsabilité <strong>……</strong> ; conséquence : <strong>……</strong> ou <strong>……</strong> ;<br>
+      • si je cause un dommage à une autre personne, j'engage ma responsabilité <strong>……</strong> ;<br>
+      • si je suis lié par un contrat avec cette personne, c'est la responsabilité civile <strong>……</strong> ;<br>
+      • si j'ai créé un dommage par imprudence, par négligence ou de façon volontaire, c'est la responsabilité civile <strong>……</strong> ;<br>
+      • conséquence de la responsabilité civile : <strong>……</strong>.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Complète les phrases de Lucas.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Explique avec tes mots ce que sont des dommages-intérêts.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> les mots à placer sont : pénale · civile · contractuelle · délictuelle · amende · prison · dommages-intérêts.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <code>Infraction → responsabilité pénale → amende ou peine de prison</code>
+        <code>Dommage → responsabilité civile → contractuelle (contrat) ou délictuelle (pas de contrat)</code>
+        <code>Conséquence de la responsabilité civile : dommages-intérêts versés à la victime</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <p class="res">Les dommages-intérêts sont une somme d'argent versée à la victime pour réparer le dommage subi.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 5 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 5</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Avec ou sans contrat ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      <strong>a.</strong> Paul livre la couronne de Valérie avec 2 heures de retard.<br>
+      <strong>b.</strong> Alain sort du fournil avec une caisse et bouscule <strong>Martin</strong>, un passant.<br>
+      <strong>c.</strong> Un client se casse une dent sur un caillou dans son pain aux noix.<br>
+      <strong>d.</strong> Un sac de farine tombe de la camionnette mal fermée et abîme la voiture d'un voisin.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Pour chaque cas, indique s'il existe un contrat entre la boulangerie et la victime.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Déduis la sorte de responsabilité civile : contractuelle ou délictuelle.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> la victime a-t-elle acheté ou commandé quelque chose ? Si oui, il y a un contrat.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <div class="table-wrap">
+        <table class="tableau-corr">
+          <tr><th>Cas</th><th>Contrat ?</th><th>Responsabilité civile</th></tr>
+          <tr><td>a. Retard de livraison</td><td>Oui (commande)</td><td class="val">Contractuelle</td></tr>
+          <tr><td>b. Passant bousculé</td><td>Non</td><td class="val">Délictuelle</td></tr>
+          <tr><td>c. Caillou dans le pain</td><td>Oui (achat)</td><td class="val">Contractuelle</td></tr>
+          <tr><td>d. Voiture du voisin</td><td>Non</td><td class="val">Délictuelle</td></tr>
+        </table>
+        </div>
+        <p class="conclu">Un client est lié par un contrat. Un passant ou un voisin ne l'est pas.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 6 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 6</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Six événements au Fournil des Tilleuls</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Exercice 3 du manuel, transposé à la boulangerie. Pour chaque événement, coche la responsabilité engagée et la conséquence possible.
+    </div>
+    <div class="table-wrap">
+    <table class="tableau-donnees">
+      <tr><th>Événement</th><th>Pénale</th><th>Civile contractuelle</th><th>Civile délictuelle</th><th>Conséquence</th></tr>
+      <tr><td>1. Martin glisse et se blesse sur le trottoir mouillé : Françoise vient de nettoyer la terrasse.</td><td>☐</td><td>☐</td><td>☐</td><td>……</td></tr>
+      <tr><td>2. Un client est malade après avoir mangé une tarte achetée à la boulangerie.</td><td>☐</td><td>☐</td><td>☐</td><td>……</td></tr>
+      <tr><td>3. Alain, en quittant précipitamment la boulangerie, bouscule une personne qui se blesse.</td><td>☐</td><td>☐</td><td>☐</td><td>……</td></tr>
+      <tr><td>4. Au coin salon de thé, Paul vend une bouteille de cidre à un mineur.</td><td>☐</td><td>☐</td><td>☐</td><td>……</td></tr>
+      <tr><td>5. À 3 h du matin, Alain décharge la farine avec la radio à fond et réveille tout le quartier.</td><td>☐</td><td>☐</td><td>☐</td><td>……</td></tr>
+      <tr><td>6. Françoise livre un pain surprise pour 30 personnes alors que le client l'avait commandé pour 100 personnes.</td><td>☐</td><td>☐</td><td>☐</td><td>……</td></tr>
+    </table>
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Recopie le tableau et coche la bonne responsabilité.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Indique la conséquence possible : amende, peine de prison ou dommages-intérêts.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> une seule question à se poser d'abord : « est-ce interdit par la loi ? ». Si oui, c'est pénal. Sinon, cherche s'il y a un contrat.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <div class="table-wrap">
+        <table class="tableau-corr">
+          <tr><th>Événement</th><th>Responsabilité</th><th>Conséquence</th></tr>
+          <tr><td>1. Trottoir mouillé</td><td class="val">Civile délictuelle</td><td>Dommages-intérêts</td></tr>
+          <tr><td>2. Client malade</td><td class="val">Civile contractuelle</td><td>Dommages-intérêts</td></tr>
+          <tr><td>3. Personne bousculée</td><td class="val">Civile délictuelle</td><td>Dommages-intérêts</td></tr>
+          <tr><td>4. Cidre vendu à un mineur</td><td class="val">Pénale</td><td>Amende</td></tr>
+          <tr><td>5. Bruit la nuit</td><td class="val">Pénale</td><td>Amende</td></tr>
+          <tr><td>6. Pain surprise trop petit</td><td class="val">Civile contractuelle</td><td>Dommages-intérêts</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span> Adaptations par rapport au manuel :
+        <p>• Ligne 4 : le corrigé du manuel indique « prison ». C'est inexact : la vente d'alcool à un mineur est punie d'une amende de 7 500 € (article L3353-3 du code de la santé publique). La prison n'est possible qu'en cas de récidive.</p>
+        <p>• Ligne 5 : le manuel parle d'une boucherie sans affichage de l'origine des viandes bovines. Ce cas ne concerne pas la boulangerie : il est remplacé par le tapage nocturne, une infraction punie d'une amende.</p>
+        <p>• Ligne 6 : la pièce montée du manuel devient un pain surprise, produit de boulangerie.</p>
+        <p class="conclu">Le même fait peut parfois engager plusieurs responsabilités. Ici, on retient la réponse principale, comme le manuel.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 7 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 7</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Personnelle ou professionnelle ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      <strong>Dimanche</strong>, jour de repos, Alain fait du vélo. Il ne regarde pas devant lui et renverse un piéton qui se blesse au bras.<br><br>
+      <strong>Mardi</strong>, pendant une livraison pour la boulangerie, Alain recule mal avec la camionnette et casse la vitrine d'un client.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Dans chaque cas, Alain engage-t-il sa responsabilité personnelle ou professionnelle ? Justifie.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Mardi, qui doit répondre du dommage causé par Alain ? Pourquoi ?</p></div>
+      <div class="question"><span class="q-num">3</span><p>Dimanche, quelle sorte de responsabilité civile Alain engage-t-il ?</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> regarde si Alain travaille au moment du dommage.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <code>Dimanche : responsabilité personnelle, Alain est dans sa vie privée.</code>
+        <code>Mardi : responsabilité professionnelle, Alain est au travail, en livraison.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <p class="res">Françoise, l'employeur : un employeur est responsable de ses salariés et de ses apprentis dans le cadre du travail.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span>
+        <p>Responsabilité civile délictuelle : il n'y a pas de contrat entre Alain et le piéton.</p>
+        <p class="conclu">La distinction personnelle / professionnelle figure au référentiel du CAP boulanger, mais le manuel ne la traite pas : elle est ajoutée ici à partir de la règle de la partie 4 du manuel (l'employeur répond de ses salariés).</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr class="section-sep">
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 3 – LES INFRACTIONS PÉNALES (séance 3)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="infractions" style="margin-top:40px">
+  <span class="icone">🚨</span>
+  <h2><small>Séance 3 · 1 h</small>Bloc 3 – Les infractions pénales</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 mémo</div>
+  <code>Contravention : infraction la moins grave, une indiscipline envers les règles de la vie en commun → amende.</code>
+  <code>Délit : volonté de transgresser une norme sociale importante → amende d'au moins 3 750 € et prison jusqu'à 10 ans pour les plus graves.</code>
+  <code>Crime : infraction la plus grave, une violation extrême des interdits fondamentaux de la société → réclusion de 15 ans à la perpétuité.</code>
+  <p class="note">Document 1 du manuel : « les trois catégories d'infraction », d'après vie-publique.fr.</p>
+</div>
+
+<!-- EX 8 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 8</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Lire le document 1</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Françoise demande à Lucas de lire le <strong>document 1</strong> du manuel pour comprendre les risques pénaux d'un commerçant. Le document présente trois catégories d'infraction : la contravention, le délit et le crime.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Recopie et complète le tableau (exercice 4 du manuel) : une ligne « définition », une ligne « sanction », une colonne par infraction.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Classe les trois infractions de la moins grave à la plus grave.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> toutes les réponses sont dans le mémo. Une phrase courte suffit par case.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span> Corrigé du manuel :
+        <div class="table-wrap">
+        <table class="tableau-corr">
+          <tr><th></th><th>Contravention</th><th>Délit</th><th>Crime</th></tr>
+          <tr><td class="val">Définition</td><td>Indiscipline à l'égard des règles de vie en commun</td><td>Volonté de transgresser une norme sociale importante</td><td>Violation extrême des interdits fondamentaux de la société</td></tr>
+          <tr><td class="val">Sanction</td><td>Amende</td><td>Amende + prison (pour les cas les plus graves)</td><td>Prison (réclusion)</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <code>Contravention → délit → crime</code>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 9 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 9</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Vrai ou faux ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Pendant la pause, Lucas et Paul discutent du document 1. Voici leurs affirmations :<br><br>
+      <strong>a.</strong> « Une contravention peut envoyer en prison. »<br>
+      <strong>b.</strong> « Le crime est l'infraction la plus grave. »<br>
+      <strong>c.</strong> « Un délit peut être puni d'une peine de prison. »<br>
+      <strong>d.</strong> « Un délit est puni d'une amende d'au moins 3 750 €. »<br>
+      <strong>e.</strong> « La réclusion pour un crime commence à 5 ans. »
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Indique si chaque affirmation est vraie ou fausse.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Corrige les affirmations fausses.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> relis la ligne « sanction » de l'exercice 8.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <code>a. Faux · b. Vrai · c. Vrai · d. Vrai · e. Faux</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <p>a. Une contravention est punie d'une amende, pas de prison.</p>
+        <p>e. La réclusion pour un crime va de 15 ans à la perpétuité.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 10 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 10</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Classer les infractions</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Exercice 5 du manuel, transposé à la boulangerie. Voici des infractions qui peuvent arriver autour du <strong>Fournil des Tilleuls</strong> :<br><br>
+      <strong>a.</strong> un individu armé d'un couteau vole la caisse ;<br>
+      <strong>b.</strong> un client consomme un café et un croissant au salon de thé, puis part sans payer (filouterie) ;<br>
+      <strong>c.</strong> un inconnu vole un sac de farine dans la réserve ;<br>
+      <strong>d.</strong> des clients font du bruit très tard devant la boutique (tapage nocturne) ;<br>
+      <strong>e.</strong> Paul gare la camionnette sur le passage piéton (stationnement gênant) ;<br>
+      <strong>f.</strong> la boulangerie refuse l'entrée à un client handicapé.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Classe chaque infraction : contravention, délit ou crime.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Quelle infraction peut être commise par la boulangerie elle-même ?</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> il y a 2 contraventions, 3 délits et 1 crime. Une arme rend l'infraction beaucoup plus grave.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <div class="table-wrap">
+        <table class="tableau-corr">
+          <tr><th>Infraction</th><th>Catégorie</th></tr>
+          <tr><td>a. Vol à main armée</td><td class="val">Crime</td></tr>
+          <tr><td>b. Filouterie (partir sans payer)</td><td class="val">Délit</td></tr>
+          <tr><td>c. Vol d'un sac de farine</td><td class="val">Délit</td></tr>
+          <tr><td>d. Tapage nocturne</td><td class="val">Contravention</td></tr>
+          <tr><td>e. Stationnement gênant</td><td class="val">Contravention</td></tr>
+          <tr><td>f. Refus d'un client handicapé</td><td class="val">Délit</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <p class="res">Le refus de laisser entrer un client handicapé (f), et le stationnement gênant du véhicule de l'entreprise (e).</p>
+        <p class="conclu">Adaptation : le manuel cite aussi deux infractions sexuelles (agressions sexuelles : délit · viol : crime). Elles ne concernent pas l'activité de la boulangerie : elles sont remplacées par le vol d'un sac de farine (délit) et le stationnement gênant (contravention). Les réponses du corrigé pour les autres cas sont reprises.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 11 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 11</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Le feu rouge de Paul</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Pendant sa tournée de livraison, <strong>Paul</strong> est pressé. Il passe au feu rouge et renverse un cycliste, qui se casse le poignet. Son vélo est détruit.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Paul a-t-il commis une infraction ? Quelle responsabilité engage-t-il ?</p></div>
+      <div class="question"><span class="q-num">2</span><p>Le cycliste a subi des dommages. Quelle autre responsabilité est engagée ? Justifie.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Cite les deux dommages subis par le cycliste.</p></div>
+      <div class="question"><span class="q-num">4</span><p>Qui devra verser les dommages-intérêts au cycliste ? Pourquoi ?</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> un même fait peut engager à la fois la responsabilité pénale et la responsabilité civile.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <p>Oui : passer au feu rouge est interdit par le code de la route.</p>
+        <code>Responsabilité pénale → amende</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <code>Responsabilité civile délictuelle : dommage causé à une autre personne, sans contrat.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span>
+        <code>Dommage corporel (poignet cassé) · dommage matériel (vélo détruit)</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">4</span>
+        <p class="res">Françoise, l'employeur, car Paul est son salarié et il était au travail.</p>
+        <p class="conclu">L'amende pénale reste personnelle : c'est Paul qui la paie. Les dommages-intérêts relèvent de la responsabilité civile de l'employeur.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr class="section-sep">
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 4 – FAUTE, DOMMAGE, EXONÉRATION (séance 4)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="civile" style="margin-top:40px">
+  <span class="icone">🧩</span>
+  <h2><small>Séance 4 · 1 h</small>Bloc 4 – Faute, dommage, lien de causalité</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 mémo</div>
+  <code>Responsabilité civile = faute + dommage + lien de causalité.</code>
+  <code>Faute : intentionnelle ou involontaire. Dommage : matériel, moral ou corporel. Lien de causalité : la victime doit prouver que le dommage vient de la faute.</code>
+  <code>On répond aussi : des choses que l'on a sous sa garde · de ses salariés et apprentis (l'employeur) · de ses enfants mineurs (les parents).</code>
+  <code>Exonération : force majeure (imprévisible, insurmontable, extérieure) · faute de la victime · fait d'un tiers.</code>
+  <p class="note">Parties 4 et 5 du manuel, document 2 : « les trois causes d'exonération de la responsabilité civile ».</p>
+</div>
+
+<!-- EX 12 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 12</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Le trottoir de Françoise et le sac de Valérie</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Exercice 6 du manuel.<br><br>
+      <strong>Cas n° 1 :</strong> Françoise a nettoyé la terrasse de la boulangerie. Martin, un passant, s'est cassé la jambe en glissant sur le trottoir mouillé.<br>
+      <strong>Cas n° 2 :</strong> Alain a taché le sac de Valérie, sa cliente, en lui remettant sa commande.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Pour chaque cas, indique la faute.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Le dommage est-il matériel, moral ou corporel ?</p></div>
+      <div class="question"><span class="q-num">3</span><p>Y a-t-il un lien de causalité entre la faute et le dommage ?</p></div>
+      <div class="question"><span class="q-num">4</span><p>Nomme le responsable et la victime.</p></div>
+      <div class="question"><span class="q-num">5</span><p>Indique la sorte de responsabilité.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> corporel = le corps est touché. Matériel = un objet est abîmé. Pour la question 5, cherche s'il y a un contrat.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span> Corrigé du manuel :
+        <div class="table-wrap">
+        <table class="tableau-corr">
+          <tr><th></th><th>Cas n° 1</th><th>Cas n° 2</th></tr>
+          <tr><td>Faute</td><td>Françoise n'a pas signalé que le trottoir était mouillé et glissant</td><td>Alain a taché le sac d'une cliente</td></tr>
+          <tr><td>Dommage</td><td class="val">Corporel</td><td class="val">Matériel</td></tr>
+          <tr><td>Lien de causalité</td><td class="val">Oui</td><td class="val">Oui</td></tr>
+          <tr><td>Responsable</td><td>Françoise</td><td>Alain</td></tr>
+          <tr><td>Victime</td><td>Martin</td><td>Valérie</td></tr>
+          <tr><td>Responsabilité</td><td class="val">Civile délictuelle</td><td class="val">Civile contractuelle</td></tr>
+        </table>
+        </div>
+        <p class="conclu">Adaptation : dans le manuel, Alain est boucher-traiteur. Ici, il est ouvrier boulanger. Précision : Alain est salarié, donc c'est Françoise, son employeur, qui répondra du dommage (voir exercice 13).</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 13 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 13</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Qui est responsable ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Exercice 7 du manuel.<br><br>
+      <strong>a.</strong> L'enseigne de la boulangerie se décroche et abîme une voiture garée dans la rue.<br>
+      <strong>b.</strong> Lucas, l'apprenti, blesse une cliente en refermant la porte de la boutique.<br>
+      <strong>c.</strong> Un enfant de 11 ans casse la vitrine réfrigérée de la boulangerie.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Cas a : qui est responsable ? Françoise, le propriétaire du véhicule ou l'enseigne ?</p></div>
+      <div class="question"><span class="q-num">2</span><p>Cas b : qui est responsable ? Françoise, Lucas ou la cliente ?</p></div>
+      <div class="question"><span class="q-num">3</span><p>Cas c : qui est responsable ? Françoise, l'enfant ou les parents de l'enfant ?</p></div>
+      <div class="question"><span class="q-num">4</span><p>Justifie chaque réponse en une phrase.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> un objet ne peut pas être responsable. Relis la 3e ligne du mémo.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span> <span class="res">Françoise.</span>
+        <code>Elle est responsable des choses qu'elle a sous sa garde.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span> <span class="res">Françoise.</span>
+        <code>L'employeur est responsable de ses apprentis dans le cadre du travail.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span> <span class="res">Les parents de l'enfant.</span>
+        <code>Les parents sont responsables de leurs enfants mineurs.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">4</span>
+        <p class="conclu">Erreur signalée : la partie 4 du manuel écrit « toute personne est responsable des choses qu'elle a sous sa garde » puis cite l'employeur et les parents. Ce sont des personnes, pas des choses. Il faut distinguer : la responsabilité du fait des choses (l'enseigne) et la responsabilité du fait des personnes dont on répond (l'apprenti, l'enfant).</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 14 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 14</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Les trois cas d'exonération</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Exercice 8 du manuel et document 2. Si une personne prouve qu'un élément extérieur a causé le dommage, elle peut dégager sa responsabilité.<br><br>
+      <strong>a.</strong> En voulant éviter un voleur qui s'enfuyait, Pierre, un client, a renversé une passante devant la boulangerie.<br>
+      <strong>b.</strong> Joseph a percuté à vélo un individu assis au milieu de la route.<br>
+      <strong>c.</strong> Paul n'a pas pu livrer les 200 petits pains d'un mariage à cause d'importantes inondations.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Relie chaque situation à un cas d'exonération : force majeure · faute de la victime · fait d'un tiers.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Donne les 3 caractères de la force majeure.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> un tiers est une autre personne que le responsable et la victime.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span> Corrigé du manuel :
+        <div class="table-wrap">
+        <table class="tableau-corr">
+          <tr><th>Situation</th><th>Cas d'exonération</th></tr>
+          <tr><td>a. Pierre et le voleur</td><td class="val">Fait d'un tiers (le voleur)</td></tr>
+          <tr><td>b. Joseph et l'individu sur la route</td><td class="val">Faute de la victime</td></tr>
+          <tr><td>c. Paul et les inondations</td><td class="val">Force majeure</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <code>Imprévisible · insurmontable · extérieure à la personne</code>
+        <p class="conclu">Remarques : l'exercice 8 du manuel écrit « faute d'un tiers » et le document 2 écrit « fait d'un tiers ». L'expression juridique est « fait d'un tiers ». La pièce montée du manuel devient une livraison de petits pains. Les inondations ne sont un cas de force majeure que si elles étaient imprévisibles et rendaient la livraison impossible.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 15 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 15</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Le chevalet sur le trottoir</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Le matin, Lucas installe sur le trottoir le chevalet qui annonce la « baguette du jour ». Il oublie de le caler. Martin passe, se prend les pieds dedans et tombe. Il se tord le poignet et casse ses lunettes.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Identifie la faute, le dommage et le lien de causalité.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Quelle sorte de responsabilité est engagée ? Justifie.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Qui devra indemniser Martin ? Pourquoi ?</p></div>
+      <div class="question"><span class="q-num">4</span><p>Françoise affirme que Martin regardait son téléphone en marchant. Quel cas d'exonération peut-elle invoquer ?</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> reprends les 3 éléments du mémo dans l'ordre. Martin a subi deux dommages.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <code>Faute : Lucas n'a pas calé le chevalet (faute involontaire, négligence).</code>
+        <code>Dommages : corporel (poignet tordu) et matériel (lunettes cassées).</code>
+        <code>Lien de causalité : Martin est tombé à cause du chevalet mal posé.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <p class="res">Responsabilité civile délictuelle : Martin est un passant, il n'a pas de contrat avec la boulangerie.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span>
+        <p>Françoise, l'employeur : elle répond des fautes de son apprenti dans le cadre du travail.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">4</span>
+        <code>La faute de la victime.</code>
+        <p class="conclu">Françoise devra le prouver. C'est le juge qui décidera si l'inattention de Martin diminue ou supprime la responsabilité de la boulangerie.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr class="section-sep">
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 5 – SUJETS TYPE EXAMEN (séance 5)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="examen" style="margin-top:40px">
+  <span class="icone">🏁</span>
+  <h2><small>Séance 5 · 1 h</small>Bloc 5 – Sujets type examen EP1</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 méthode pour l'examen</div>
+  <code>1. Lire la situation et souligner : le responsable, la victime, la faute, le dommage</code>
+  <code>2. Se poser 3 questions : y a-t-il une infraction ? un dommage ? un contrat ?</code>
+  <code>3. Justifier : « parce que… », « il existe un contrat entre… », « l'employeur répond de… »</code>
+  <p class="note">À l'épreuve EP1, la partie gestion appliquée dure environ 30 minutes. Elle s'appuie sur une situation professionnelle. Réponds par des phrases courtes et complètes.</p>
+</div>
+
+<!-- EX 16 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 16</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Sujet court : la commande du mariage</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Valérie commande au Fournil des Tilleuls <strong>150 petits pains</strong> pour le mariage de sa fille, à livrer samedi à 11 h à la salle des fêtes. Elle verse un acompte.<br><br>
+      Samedi, Paul part en retard et livre à 15 h, après le repas. En déchargeant, il raye avec un chariot la voiture d'un invité garée devant la salle.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Identifie le contrat et les parties.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Quelle obligation de la boulangerie n'est pas respectée ?</p></div>
+      <div class="question"><span class="q-num">3</span><p>Pour le retard, quelle responsabilité est engagée ? Quelle conséquence ?</p></div>
+      <div class="question"><span class="q-num">4</span><p>Pour la voiture rayée, quelle responsabilité est engagée ? Justifie.</p></div>
+      <div class="question"><span class="q-num">5</span><p>La boulangerie peut-elle invoquer un cas d'exonération pour le retard ? Justifie.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> Valérie a un contrat avec la boulangerie, l'invité n'en a pas.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <code>Contrat de vente (commande avec livraison) entre Valérie (cliente) et la boulangerie Le Fournil des Tilleuls (Françoise).</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <p>Livrer la commande à la date et à l'heure prévues.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span>
+        <p class="res">Responsabilité civile contractuelle → dommages-intérêts à Valérie.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">4</span>
+        <p class="res">Responsabilité civile délictuelle : l'invité n'a pas de contrat avec la boulangerie. Françoise répond du dommage causé par son salarié.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">5</span>
+        <p>Non : Paul est simplement parti en retard. Il n'y a ni force majeure, ni faute de la victime, ni fait d'un tiers.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 17 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 17</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Sujet court : une journée agitée</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Mercredi au Fournil des Tilleuls :<br><br>
+      • <strong>9 h :</strong> un client mange un pain au chocolat au salon de thé et part sans payer ;<br>
+      • <strong>14 h :</strong> un enfant de 9 ans fait tomber le présentoir de viennoiseries, qui se casse ;<br>
+      • <strong>18 h :</strong> pendant une forte tempête, l'enseigne se décroche et abîme une voiture garée devant la boutique.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>9 h : nomme l'infraction et sa catégorie. Quelle responsabilité engage le client ?</p></div>
+      <div class="question"><span class="q-num">2</span><p>14 h : qui doit réparer le dommage ? Quel est le type de dommage ?</p></div>
+      <div class="question"><span class="q-num">3</span><p>18 h : pourquoi Françoise est-elle en principe responsable ?</p></div>
+      <div class="question"><span class="q-num">4</span><p>18 h : Françoise peut-elle invoquer la force majeure ? À quelles conditions ?</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> pour la question 4, vérifie les 3 caractères de la force majeure.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <code>Filouterie (partir sans payer) → délit → responsabilité pénale.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <p class="res">Les parents de l'enfant, car les parents sont responsables de leurs enfants mineurs. Dommage matériel.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span>
+        <p>Elle est responsable des choses qu'elle a sous sa garde : l'enseigne de la boulangerie.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">4</span>
+        <p>Oui, seulement si la tempête était imprévisible, insurmontable et extérieure. Si l'enseigne était mal fixée, ou si la tempête était annoncée, Françoise reste responsable.</p>
+        <p class="conclu">Il faut toujours vérifier les 3 caractères : une tempête n'est pas automatiquement un cas de force majeure.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 18 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 18</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Sujet complet (30 min) : une semaine au Fournil des Tilleuls</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Tu es apprenti au <strong>Fournil des Tilleuls</strong>. Françoise te demande de l'aider à comprendre les incidents de la semaine.<br><br>
+      • <strong>Lundi :</strong> Lucas renverse de la farine dans la boutique sans nettoyer. Une cliente, Mme Diallo, glisse, tombe et se casse le bras.<br>
+      • <strong>Mercredi :</strong> Paul gare la camionnette en double file pour décharger.<br>
+      • <strong>Vendredi :</strong> un inconnu vole deux sacs de farine dans la réserve.<br>
+      • <strong>Samedi :</strong> un client avait commandé un plateau de 50 mini-viennoiseries. La boulangerie lui en livre 30.<br><br>
+      <em>Barème indicatif sur 20 points.</em>
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Définis la responsabilité. (2 pts)</p></div>
+      <div class="question"><span class="q-num">2</span><p>Lundi : identifie la faute, le dommage et le lien de causalité. (3 pts)</p></div>
+      <div class="question"><span class="q-num">3</span><p>Lundi : quelle sorte de responsabilité est engagée ? Quelle obligation de la boulangerie n'est pas respectée ? (2 pts)</p></div>
+      <div class="question"><span class="q-num">4</span><p>Lundi : qui devra indemniser Mme Diallo ? Justifie. (2 pts)</p></div>
+      <div class="question"><span class="q-num">5</span><p>Mercredi et vendredi : classe chaque infraction (contravention, délit, crime) et donne la sanction possible. (4 pts)</p></div>
+      <div class="question"><span class="q-num">6</span><p>Samedi : quelle responsabilité est engagée ? Quelle conséquence ? (2 pts)</p></div>
+      <div class="question"><span class="q-num">7</span><p>Explique la différence entre responsabilité pénale et responsabilité civile. (2 pts)</p></div>
+      <div class="question"><span class="q-num">8</span><p>Pour lundi, Françoise dit : « Mme Diallo ne regardait pas où elle marchait. » Quel cas d'exonération invoque-t-elle ? Cite les deux autres cas. (3 pts)</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> traite les jours dans l'ordre. Pour chaque fait : infraction ? dommage ? contrat ?</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <p class="res">La responsabilité est l'obligation de réparer les dommages causés à une victime par son propre fait, par le fait des personnes dont on doit répondre ou des choses que l'on a sous sa garde.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <code>Faute : farine renversée et non nettoyée (faute involontaire) · dommage corporel (bras cassé) · lien de causalité : la chute est due à la farine.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span>
+        <p>Responsabilité civile contractuelle : Mme Diallo est une cliente. Obligation non respectée : assurer la sécurité du client.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">4</span>
+        <p>Françoise, l'employeur : elle répond des fautes de son apprenti dans le cadre du travail.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">5</span>
+        <div class="table-wrap">
+        <table class="tableau-corr">
+          <tr><th>Fait</th><th>Catégorie</th><th>Sanction</th></tr>
+          <tr><td>Mercredi : stationnement en double file</td><td class="val">Contravention</td><td>Amende</td></tr>
+          <tr><td>Vendredi : vol de farine</td><td class="val">Délit</td><td>Amende et/ou prison</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">6</span>
+        <p class="res">Responsabilité civile contractuelle (commande non respectée) → dommages-intérêts.</p>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">7</span>
+        <code>Pénale : infraction à la loi → amende ou prison.</code>
+        <code>Civile : dommage causé à une autre personne → dommages-intérêts à la victime.</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">8</span>
+        <code>Faute de la victime · autres cas : force majeure et fait d'un tiers.</code>
+        <p class="conclu">Le barème est indicatif : il ne reprend pas un barème officiel.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+</main>
+
+<footer class="site-footer">
+  CAP boulanger – Gestion appliquée &nbsp;|&nbsp; Chapitre 18 : la responsabilité &nbsp;|&nbsp; 18 exercices progressifs
+</footer>
+
+<script>
+function toggleCorr(btn) {
+  const corr = btn.nextElementSibling;
+  const isVisible = corr.classList.contains('visible');
+  corr.classList.toggle('visible', !isVisible);
+  btn.textContent = isVisible ? '✅ Voir la correction' : '🔒 Masquer la correction';
+}
+</script>
+</body>
+</html>
